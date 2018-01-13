@@ -1,4 +1,4 @@
-/' -- Anti-aliased lines - 2018 Jan 10 - by dafhi 
+/' -- Anti-aliased lines - 2018 Jan 13 - by dafhi 
 
   ' - usage -----------------------
   dim as imagevars      buf
@@ -25,8 +25,6 @@ End Type
 
 namespace AaLine
   
-  'dim As single               x0,y0,x1,y1,wid=1,endcap
-  'dim As ulong                col
   dim as aalinevars           lv
   dim as aalinevars ptr       p
   
@@ -412,8 +410,6 @@ namespace AaLine
   
   sub pdraw(byref pp as aalinevars ptr)
     p = pp
-    'x0=p->x0: x1=p->x1: y0=p->y0: y1=p->y1
-    'col=p->col: wid=p->wid: endcap=p->endcap
     calc
   End Sub
   
