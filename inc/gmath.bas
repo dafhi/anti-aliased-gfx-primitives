@@ -48,4 +48,3 @@ operator -(l as v3s,r as v3s) as v3s: return type(l.x-r.x,l.y-r.y,l.z-r.z): end 
 operator +(l as v3s,r as v3s) as v3s: return type(l.x+r.x,l.y+r.y,l.z+r.z): end operator
 
 #define r255 int(rnd*256)
-#define rcol rgba(r255,r255,r255,r255)
