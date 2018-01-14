@@ -1,8 +1,8 @@
 /' -- Anti-aliased lines - 2018 Jan 13 - by dafhi 
 
   ' - usage -----------------------
-  dim as imagevars      buf
-  buf.screen_init 800,600
+  screenres 800,600,32
+  dim as imagevars      buf:  buf.get_info
 
   aaline.render_target @buf
   screenlock
