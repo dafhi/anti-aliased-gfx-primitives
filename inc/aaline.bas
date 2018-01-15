@@ -187,11 +187,13 @@ namespace AaLine
   End Sub
   
   Function int_lo(in As Single,clip As Single) As Single
-    If in<clip Then: Return floor(clip): Else: Return floor(in): EndIf
+    If in<=clip Then Return floor(clip)
+    Return floor(in)
   End Function
   
   Function int_hi(in As Single,clip As Single) As Single
-    If in>clip Then: Return floor(clip): Else: Return floor(in): EndIf
+    If in>=clip Then Return floor(clip)
+    Return floor(in)
   End Function
   
   sub scanlines_abcd(y0 as integer, y1 as single)
