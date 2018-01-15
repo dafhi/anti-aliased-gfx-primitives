@@ -20,7 +20,7 @@ dim as dotvars    d
 #define res (rnd-.1)*buf.diagonal
 
 screenlock
-  for i as myint = 0 to 9
+  for i as myint = 0 to 19
     l.col = rgb(r255,r255,r255)
     l.wid = .5 + rnd*rnd*rnd*24
     l.endcap = rnd
