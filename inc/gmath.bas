@@ -47,4 +47,13 @@ operator *(l as v3s,r as v3s) as v3s: return type(l.x*r.x,l.y*r.y,l.z*r.z): end 
 operator -(l as v3s,r as v3s) as v3s: return type(l.x-r.x,l.y-r.y,l.z-r.z): end operator
 operator +(l as v3s,r as v3s) as v3s: return type(l.x+r.x,l.y+r.y,l.z+r.z): end operator
 
-#define r255 int(rnd*256)
+#undef rnd
+function rnd as double
+   static as ulong a = 0, b = 0 '' Uint32
+   a *= a
+   a xor= b
+   b += 1
+   return a / culng(-1)
+End Function
+
+#define r255 floor(rnd*256)
