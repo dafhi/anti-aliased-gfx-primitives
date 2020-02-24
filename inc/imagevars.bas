@@ -17,7 +17,7 @@ type imagevars          '' 2018 Jan 9 - by dafhi
 end type
 Destructor.imagevars:  destroy
 End Destructor
-Sub imagevars.Destroy():  If ImageInfo(im) = 0 <> 0 Then ImageDestroy im: im = 0: endif:  End Sub
+Sub imagevars.Destroy():  If ImageInfo(im) = 0 Then ImageDestroy im: im = 0: endif:  End Sub
 sub imagevars.get_info(im as any ptr)
   if im=0 then:  pixels=screenptr
     ScreenInfo w,h, bpp,, pitch, rate, driver_name:  bypp=bpp\8 '2018 Jan 9
