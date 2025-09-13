@@ -1,4 +1,4 @@
-/' ------- gmath.bas 2017 Dec 7 - by dafhi -------- '/
+/' ------- gmath.bas 2025 Sep 13 - by dafhi -------- '/
 
 #include once "imagevars.bas"
 
@@ -24,10 +24,15 @@ function roun(in as single, places as ubyte = 0) as single
   dim as integer mul = 10 ^ places:  return floor(in * mul + .5) / mul
 end function
 
-function clamp(in as single, hi as single=1, lo as single=0) as single
-  if in < lo then return lo
-  if in > hi then return hi
-  return in
+function sqr_safe( d as double ) as double
+    return sgn(d) * sqr( abs(d))
+end function
+
+  #define min( a,b) iif( (a)<(b), (a), (b) )
+  #define max( a,b) iif( (a)>(b), (a), (b) )
+
+function clamp( in As double, hi As double = 1, lo As double = 0) As double
+  return min( max(in, lo), hi ) '' 2023 June 12
 End Function
 
 '' single precision vector
