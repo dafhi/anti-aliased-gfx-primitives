@@ -1,4 +1,4 @@
-/' ------- aadot 2025 Sep 13 - by dafhi -------- '/
+/' ------- aadot 2025 Sep 13.u1 - by dafhi -------- '/
 
 #include once "gmath.bas"
 
@@ -44,18 +44,24 @@ namespace AaDot
     #if 1
     '' 2025 Sep 13  version
     
-    dim as single radsq = rad ^ 2
+    if im->wm > ubound(a_sdx) then redim a_sdx(im->wm)
+    
+    /' -- Google Gemini assisted to get the ball rolling
+    with a few optimizations by myself, i finally solved
+    a multiply-eliminating puzzle hoped for in previous work
+    '/
+
+    dim as double radsq = rad ^ 2
     dim as single component_sa = 256.499 * (col shr 24) / 255
-    dim as single sharp = slope * component_sa
+    dim as single sharp = component_sa * slope
     dim as single sharp_by_rSq = sharp / radsq
-  
+    
     #define more_optimized
   
       ' Pre-calculate squared x delta with additional adjustment to eliminate nested multiply
-    if im->wm > ubound(a_sdx) then redim a_sdx( im->wm)
     for ix as long = x0 to x1
         #ifdef more_optimized
-        a_sdx(ix) = (ix - x)^2 * sharp_by_rSq
+        a_sdx(ix) = (ix - x)^2 * sharp_by_rSq ' eliminates nested multiply and division
         #else
         a_sdx(ix) = (ix - x)^2
         #endif
@@ -66,7 +72,9 @@ namespace AaDot
     dim as ulong ptr pixel = im->pixels + iy * im->pitch
     dim as single    dySq  = ( iy - y ) ^ 2
     dim as single    r     = sqr_safe(radsq - dySq) - .5 ' circle-constrained scan width
-    dim as single    f_dy  = dySq * sharp_by_rSq         ' precalc to remove nested multiply
+    
+                                                        ' original  : (dx*dx + dy*dy)/radSq
+    dim as single    f_dy  = dySq * sharp_by_rSq        ' optimized : a_sdx()*precalc + dySq*precalc
 
     dim as long      ix0 = max( x - r, x0 ), ix1 = min( x + r, x1 )
         for ix as long = ix0 to ix1
