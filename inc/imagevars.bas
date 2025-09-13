@@ -30,13 +30,16 @@ sub imagevars.get_info(im as any ptr)
 end sub
 
 
-#Macro Alpha256(ret,back, fore, a256) '2017 Mar 26
-  ret=((_
-  (fore And &Hff00ff) * a256 + _
-  (back And &Hff00ff) * (256-a256) + &H800080) And &Hff00ff00 Or (_
-  (fore And &H00ff00) * a256 + _
-  (back And &H00ff00) * (256-a256) + &H008000) And &H00ff0000) Shr 8
-#EndMacro
+  #Macro Alpha256( ret, back, fore, a256) 'blend colors. alpha max = 256  (2025 Apr 8)
+      scope
+        dim as long _a = (a256)
+        ret=((_
+        (fore And &Hff00ff) * _a + _
+        (back And &Hff00ff) * (256-_a) + &H800080) And &Hff00ff00 Or (_
+        (fore And &H00ff00) * _a + _
+        (back And &H00ff00) * (256-_a) + &H008000) And &H00ff0000) Shr 8
+      end scope
+  #EndMacro
 
 Union UnionARGB
   As Ulong col:  Type: As UByte  B,G,R,A:  End Type
